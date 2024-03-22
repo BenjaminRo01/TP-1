@@ -1,5 +1,7 @@
 import actividad2.*;
 import org.junit.Test;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.common.processor.MasterDetailRecord;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestRestaurante {
@@ -12,9 +14,10 @@ public class TestRestaurante {
         pedido.agregarProducto(new Plato("Pizza Margarita", 1, 7.99));
         pedido.agregarProducto(new Plato("Ensalada César", 1, 4.99));
         pedido.agregarProducto(new Plato("Tarta de Queso", 2, 3.50));
+        Visa tarjetaVisa = new Visa(3);
         double propina = 3.00; // 3%
 
-        double costo = new Visa(3).pago(pedido, propina);
+        double costo = Dispositivo.realizarPago(pedido, tarjetaVisa, propina);
 
         assertEquals(costo, 36.92);
     }
@@ -27,9 +30,10 @@ public class TestRestaurante {
         pedido.agregarProducto(new Plato("Pizza Margarita", 1, 7.99));
         pedido.agregarProducto(new Plato("Ensalada César", 1, 4.99));
         pedido.agregarProducto(new Plato("Tarta de Queso", 2, 3.50));
+        Mastercard tarjetaMastercard = new Mastercard(2);
         double propina = 3.00;
 
-        double costo = new Mastercard(2).pago(pedido, propina);
+        double costo = Dispositivo.realizarPago(pedido, tarjetaMastercard, propina);
 
         assertEquals(costo, 36.38);
     }
@@ -42,9 +46,10 @@ public class TestRestaurante {
         pedido.agregarProducto(new Plato("Pizza Margarita", 1, 7.99));
         pedido.agregarProducto(new Plato("Ensalada César", 1, 4.99));
         pedido.agregarProducto(new Plato("Tarta de Queso", 2, 3.50));
+        Comarcaplus tarjetaComarcaPlus = new Comarcaplus(2);
         double propina = 3.00;
 
-        double costo = new Comarcaplus(2).pago(pedido, propina);
+        double costo = Dispositivo.realizarPago(pedido, tarjetaComarcaPlus, propina);
         assertEquals(costo, 36.3);
     }
     @Test
@@ -56,9 +61,10 @@ public class TestRestaurante {
         pedido.agregarProducto(new Plato("Pizza Margarita", 1, 7.99));
         pedido.agregarProducto(new Plato("Ensalada César", 1, 4.99));
         pedido.agregarProducto(new Plato("Tarta de Queso", 2, 3.50));
+        TarjetaCredito otraTarjeta = new TarjetaCredito(0);
         double propina = 3.00;
 
-        double costo = new TarjetaCredito(0).pago(pedido, propina);
+        double costo = Dispositivo.realizarPago(pedido, otraTarjeta, propina);
 
         assertEquals(costo, 37.04);
     }
