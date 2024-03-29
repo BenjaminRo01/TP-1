@@ -5,10 +5,12 @@ import java.util.Objects;
 public class Participante {
     private String nombre;
     private String dni;
+    private int puntaje;
 
     public Participante(String nombre, String dni) {
         this.nombre = nombre;
         this.dni = dni;
+        this.puntaje = 0;
     }
 
     @Override
@@ -22,5 +24,12 @@ public class Participante {
     @Override
     public int hashCode() {
         return Objects.hash(dni);
+    }
+
+    public void sumar(int puntaje){
+        this.puntaje += puntaje;
+    }
+    public int obtenerPuntaje(){
+        return this.puntaje;
     }
 }

@@ -7,16 +7,15 @@ public class Inscripcion {
     private Concurso concurso;
     private LocalDate fechaInscripcion;
     private int puntaje;
-    public Inscripcion(Participante participante, Concurso concurso, LocalDate fechaInscripcion, Integer puntaje) {
+    public Inscripcion(Participante participante, Concurso concurso, LocalDate fechaInscripcion) {
         this.participante = participante;
         this.concurso = concurso;
         this.fechaInscripcion = fechaInscripcion;
-        this.puntaje = puntaje;
     }
     public static void inscribirAEn(Participante participante, Concurso concurso, LocalDate fechaInscripcion) {
         if(!concurso.estaInscripto(participante) && concurso.puedeInscribirse(fechaInscripcion)) {
-            int p = concurso.asignarPuntaje(fechaInscripcion);
-            Inscripcion inscripcion = new Inscripcion(participante, concurso, fechaInscripcion, p);
+            Inscripcion inscripcion = new Inscripcion(participante, concurso, fechaInscripcion);
+            concurso.asignarPuntaje(participante, fechaInscripcion);
             concurso.agregarInscripcion(inscripcion);
         }
         else{
@@ -27,7 +26,5 @@ public class Inscripcion {
     public boolean existeParticipante(Participante participante){
         return this.participante.equals(participante);
     }
-    public int obtenerPuntaje(){
-        return this.puntaje;
-    }
+
 }

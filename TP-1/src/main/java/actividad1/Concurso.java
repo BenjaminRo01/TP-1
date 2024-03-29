@@ -24,11 +24,11 @@ public class Concurso {
     public boolean puedeInscribirse(LocalDate fechaInscripcion){
         return fechaInscripcion.isEqual(this.fechaInicio) || fechaInscripcion.isAfter(this.fechaInicio) && fechaInscripcion.isBefore(this.fechaFin);
     }
-    public int asignarPuntaje(LocalDate fechaInscripcion){
-        return fechaInicio.isEqual(fechaInscripcion) ? 10 : 0;
+    public void asignarPuntaje(Participante participante, LocalDate fechaInscripcion){
+        int puntajeGanado = fechaInicio.isEqual(fechaInscripcion) ? 10 : 0;
+        participante.sumar(puntajeGanado);
     }
     public int puntosGanados(Participante participante){ //el "::" se utiliza para crear una referencia al metodo de Inscripcion
-        return this.inscriptos.stream()
-                .filter(i -> i.existeParticipante(participante)).findFirst().map(Inscripcion::obtenerPuntaje).orElse(0);
+        return participante.obtenerPuntaje();
     }
 }
