@@ -31,4 +31,8 @@ public class Concurso {
     public int puntosGanados(Participante participante){ //el "::" se utiliza para crear una referencia al metodo de Inscripcion
         return participante.obtenerPuntaje();
     }
+
+    public String obtenerNombre(){
+        return this.nombre;
+    }
 }

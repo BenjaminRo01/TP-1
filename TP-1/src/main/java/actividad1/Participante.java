@@ -32,4 +32,7 @@ public class Participante {
     public int obtenerPuntaje(){
         return this.puntaje;
     }
+    public String obtenerNombre(){
+        return this.nombre;
+    }
 }

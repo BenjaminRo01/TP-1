@@ -1,6 +1,7 @@
 import actividad2.*;
 import org.junit.Test;
 import org.junit.jupiter.params.shadow.com.univocity.parsers.common.processor.MasterDetailRecord;
+import persistencia.EnDiscoRegistroCostos;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +18,7 @@ public class TestRestaurante {
         Visa tarjetaVisa = new Visa(3);
         double propina = 3.00; // 3%
 
-        double costo = Dispositivo.realizarPago(pedido, tarjetaVisa, propina);
+        double costo = Dispositivo.realizarPago(pedido, tarjetaVisa, propina, new EnDiscoRegistroCostos());
 
         assertEquals(costo, 36.92);
     }
@@ -33,7 +34,7 @@ public class TestRestaurante {
         Mastercard tarjetaMastercard = new Mastercard(2);
         double propina = 3.00;
 
-        double costo = Dispositivo.realizarPago(pedido, tarjetaMastercard, propina);
+        double costo = Dispositivo.realizarPago(pedido, tarjetaMastercard, propina, new EnDiscoRegistroCostos());
 
         assertEquals(costo, 36.38);
     }
@@ -49,7 +50,7 @@ public class TestRestaurante {
         Comarcaplus tarjetaComarcaPlus = new Comarcaplus(2);
         double propina = 3.00;
 
-        double costo = Dispositivo.realizarPago(pedido, tarjetaComarcaPlus, propina);
+        double costo = Dispositivo.realizarPago(pedido, tarjetaComarcaPlus, propina, new EnDiscoRegistroCostos());
         assertEquals(costo, 36.3);
     }
     @Test
@@ -64,7 +65,7 @@ public class TestRestaurante {
         TarjetaCredito otraTarjeta = new TarjetaCredito(0);
         double propina = 3.00;
 
-        double costo = Dispositivo.realizarPago(pedido, otraTarjeta, propina);
+        double costo = Dispositivo.realizarPago(pedido, otraTarjeta, propina, new EnDiscoRegistroCostos());
 
         assertEquals(costo, 37.04);
     }
