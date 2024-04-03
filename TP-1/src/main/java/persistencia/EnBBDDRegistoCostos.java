@@ -22,6 +22,5 @@ public class EnBBDDRegistoCostos implements RegistroDeCostos {
         } catch (SQLException e) {
             throw new RuntimeException("No se ha podido registrar.", e);
         }
-
     }
 }
