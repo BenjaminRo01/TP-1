@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestRestaurante {
     @Test
     public void testVisa(){
+        String path = "C:/Registros/Costos.txt";
         Pedido pedido = new Pedido();
         pedido.agregarProducto(new Bebida("Coca-Cola", 2, 1.50));
         pedido.agregarProducto(new Bebida("Agua Mineral", 1, 1.00));
@@ -18,12 +19,13 @@ public class TestRestaurante {
         Visa tarjetaVisa = new Visa(3);
         double propina = 3.00; // 3%
 
-        double costo = Dispositivo.realizarPago(pedido, tarjetaVisa, propina, new EnDiscoRegistroCostos());
+        double costo = Dispositivo.realizarPago(pedido, tarjetaVisa, propina, new EnDiscoRegistroCostos(path));
 
         assertEquals(costo, 36.92);
     }
     @Test
     public void testMastercard(){
+        String path = "C:/Registros/Costos.txt";
         Pedido pedido = new Pedido();
         pedido.agregarProducto(new Bebida("Coca-Cola", 2, 1.50));
         pedido.agregarProducto(new Bebida("Agua Mineral", 1, 1.00));
@@ -34,12 +36,13 @@ public class TestRestaurante {
         Mastercard tarjetaMastercard = new Mastercard(2);
         double propina = 3.00;
 
-        double costo = Dispositivo.realizarPago(pedido, tarjetaMastercard, propina, new EnDiscoRegistroCostos());
+        double costo = Dispositivo.realizarPago(pedido, tarjetaMastercard, propina, new EnDiscoRegistroCostos(path));
 
         assertEquals(costo, 36.38);
     }
     @Test
     public void testComarcaplus(){
+        String path = "C:/Registros/Costos.txt";
         Pedido pedido = new Pedido();
         pedido.agregarProducto(new Bebida("Coca-Cola", 2, 1.50));
         pedido.agregarProducto(new Bebida("Agua Mineral", 1, 1.00));
@@ -50,11 +53,12 @@ public class TestRestaurante {
         Comarcaplus tarjetaComarcaPlus = new Comarcaplus(2);
         double propina = 3.00;
 
-        double costo = Dispositivo.realizarPago(pedido, tarjetaComarcaPlus, propina, new EnDiscoRegistroCostos());
+        double costo = Dispositivo.realizarPago(pedido, tarjetaComarcaPlus, propina, new EnDiscoRegistroCostos(path));
         assertEquals(costo, 36.3);
     }
     @Test
     public void testViedma(){
+        String path = "C:/Registros/Costos.txt";
         Pedido pedido = new Pedido();
         pedido.agregarProducto(new Bebida("Coca-Cola", 2, 1.50));
         pedido.agregarProducto(new Bebida("Agua Mineral", 1, 1.00));
@@ -65,7 +69,7 @@ public class TestRestaurante {
         TarjetaCredito otraTarjeta = new TarjetaCredito(0);
         double propina = 3.00;
 
-        double costo = Dispositivo.realizarPago(pedido, otraTarjeta, propina, new EnDiscoRegistroCostos());
+        double costo = Dispositivo.realizarPago(pedido, otraTarjeta, propina, new EnDiscoRegistroCostos(path));
 
         assertEquals(costo, 37.04);
     }

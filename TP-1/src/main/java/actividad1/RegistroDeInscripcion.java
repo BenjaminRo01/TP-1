@@ -1,5 +1,7 @@
 package actividad1;
 
+import java.time.LocalDate;
+
 public interface RegistroDeInscripcion {
-    void registrar(String registro);
+    void registrar(LocalDate fecha, Participante participante, Concurso concurso);
 }

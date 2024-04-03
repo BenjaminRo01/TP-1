@@ -12,26 +12,28 @@ public class TestConcurso {
     @Test
     public void testInscripcion(){
         //Inicialización
+        String path = "C:/Registros/Inscripciones.txt";
         LocalDate fechaInscripcion = LocalDate.of(2024,3,14); //14/03/2024
         Participante participante = new Participante("Benjamin","43434032");
         Concurso concurso = new Concurso("Concurso 1",
                 LocalDate.of(2024,3,1),  //01/03/2024
                 LocalDate.of(2024,3,31));//31/03/2024
         //Ejercitación
-        Inscripcion.inscribirAEn(participante, concurso, fechaInscripcion, new EnDiscoRegistroInscripcion());
+        Inscripcion.inscribirAEn(participante, concurso, fechaInscripcion, new EnDiscoRegistroInscripcion(path));
         //Verificación
         assertTrue(concurso.estaInscripto(participante));
     }
     @Test
     public void testInscripcionPrimerDia(){
         //Inicialización
+        String path = "C:/Registros/Inscripciones.txt";
         LocalDate fechaInscripcion = LocalDate.of(2024,3,1); //01/03/2024
         Participante participante = new Participante("Juan","40444022");
         Concurso concurso = new Concurso("Concurso 2",
                 LocalDate.of(2024,3,1),  //01/03/2024
                 LocalDate.of(2024,3,31));//31/03/2024
         //Ejercitación
-        Inscripcion.inscribirAEn(participante, concurso, fechaInscripcion, new EnDiscoRegistroInscripcion());
+        Inscripcion.inscribirAEn(participante, concurso, fechaInscripcion, new EnDiscoRegistroInscripcion(path));
         //Verificación
         assertTrue(concurso.estaInscripto(participante));
         assertEquals(10, concurso.puntosGanados(participante));
@@ -39,6 +41,7 @@ public class TestConcurso {
     @Test
     public void testInscripcionFueraDelRango(){
         //Inicialización
+        String path = "C:/Registros/Inscripciones.txt";
         LocalDate fechaInscripcion = LocalDate.of(2024,4,1); //01/04/2024
         Participante participante = new Participante("Benjamin","43434032");
         Concurso concurso = new Concurso("Concurso 1",
@@ -48,7 +51,7 @@ public class TestConcurso {
         //Inscripcion.inscribirAEn(participante, concurso, fechaInscripcion);
         //Verificación
         assertThrows(RuntimeException.class, ()->{
-            Inscripcion.inscribirAEn(participante, concurso, fechaInscripcion, new EnDiscoRegistroInscripcion());
+            Inscripcion.inscribirAEn(participante, concurso, fechaInscripcion, new EnDiscoRegistroInscripcion(path));
         });
     }
 }

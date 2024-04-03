@@ -26,10 +26,7 @@ public class Inscripcion {
         concurso.asignarPuntaje(participante, fechaInscripcion);
         concurso.agregarInscripcion(inscripcion);
 
-        String formatoInscripcion = DateTimeFormatter.ofPattern("dd/MM/yyyy").format(fechaInscripcion)
-                + " || " + participante.obtenerNombre()
-                + " || " + concurso.obtenerNombre() + "\n";
-        registro.registrar(formatoInscripcion);
+        registro.registrar(fechaInscripcion, participante, concurso);
     }
     public boolean existeParticipante(Participante participante){
         return this.participante.equals(participante);

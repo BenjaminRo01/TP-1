@@ -1,17 +1,28 @@
 package persistencia;
 
+import actividad1.Concurso;
+import actividad1.Participante;
 import actividad1.RegistroDeInscripcion;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class EnDiscoRegistroInscripcion implements RegistroDeInscripcion {
+    private String path;
+    public EnDiscoRegistroInscripcion(String path){
+        this.path = path;
+    }
     @Override
-    public void registrar(String registro) {
+    public void registrar(LocalDate fecha, Participante participante, Concurso concurso) {
         try {
-            Files.write(Paths.get("C:/Registros/Inscripciones.txt"),
+            String registro = DateTimeFormatter.ofPattern("dd/MM/yyyy").format(fecha)
+                    + " || " + participante.obtenerNombre()
+                    + " || " + concurso.obtenerNombre() + "\n";
+            Files.write(Paths.get(this.path),
                     registro.getBytes(), StandardOpenOption.APPEND);
         }
         catch (IOException e){
