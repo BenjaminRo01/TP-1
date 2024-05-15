@@ -1,8 +1,8 @@
 package persistencia;
 
-import actividad1.Concurso;
-import actividad1.Participante;
-import actividad1.RegistroDeInscripcion;
+import actividad5.Concurso;
+import actividad5.Participante;
+import actividad5.RegistroDeInscripcion;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

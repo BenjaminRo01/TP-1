@@ -1,8 +1,8 @@
 package persistencia;
 
-import actividad1.Concurso;
-import actividad1.Participante;
-import actividad1.RegistroDeInscripcion;
+import actividad5.Concurso;
+import actividad5.Participante;
+import actividad5.RegistroDeInscripcion;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
 import jakarta.mail.PasswordAuthentication;
