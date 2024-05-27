@@ -1,4 +1,4 @@
-package actividad2;
+package model;
 
 public class TarjetaCredito {
     protected double descuento;

@@ -1,15 +1,17 @@
-package actividad2;
+package model;
 
-public class Mastercard extends TarjetaCredito{
-    public Mastercard(double descuento){
+public class Visa extends TarjetaCredito{
+    //se podría crear una variable "descuento"?
+    //Se podría crear un metodo "aplicarDescuento"?
+    public Visa(double descuento){
         super(descuento);
     }
     @Override
     public double pago(Pedido pedido, double propina) {
-        double costoBebidas = pedido.obtenerPrecioTotalBebidas();
         double costoPlatos = pedido.obtenerPrecioTotalPlatos();
+        double costoBebidas = pedido.obtenerPrecioTotalBebidas();
         double costoFinal = costoPlatos + costoBebidas;
-        costoFinal -= calcularDescuento(costoPlatos);
+        costoFinal -= calcularDescuento(costoBebidas);
         costoFinal += calcularPropina(costoFinal, propina);
         costoFinal = Math.round(costoFinal * 100d) / 100d;
         return costoFinal;

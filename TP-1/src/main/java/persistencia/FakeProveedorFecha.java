@@ -1,6 +1,6 @@
 package persistencia;
 
-import actividad2.ProveedorFecha;
+import model.ProveedorFecha;
 
 import java.time.LocalDate;
 

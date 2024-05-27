@@ -1,4 +1,4 @@
-package actividad2;
+package model;
 
 public class Producto {
     private String nombre;

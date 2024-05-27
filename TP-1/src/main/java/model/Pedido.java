@@ -1,4 +1,4 @@
-package actividad2;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;

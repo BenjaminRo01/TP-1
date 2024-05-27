@@ -1,6 +1,6 @@
 package persistencia;
 
-import actividad2.RegistroDeCostos;
+import model.RegistroDeCostos;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,4 +1,4 @@
-package actividad2;
+package model;
 
 public class Comarcaplus extends TarjetaCredito{
     public Comarcaplus(double descuento){

@@ -1,4 +1,4 @@
-package actividad2;
+package model;
 
 public class Plato extends Producto{
     public Plato(String nombre, int cantidad, double precio) {
