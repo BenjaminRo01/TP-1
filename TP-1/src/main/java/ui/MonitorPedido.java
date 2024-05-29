@@ -27,16 +27,11 @@ public class MonitorPedido extends JFrame {
 
     public MonitorPedido(Dispositivo dispositivo) {
         setTitle("Formulario de Pedido");
-        setSize(500, 400);
+        setSize(750, 450); // Ajustar el tamaño total del frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         this.pedido = new Pedido();
         this.dispositivo = dispositivo;
-        // Panel principal
-        JPanel panelPrincipal = new JPanel(new BorderLayout());
-
-        // Panel de entrada de datos
-        JPanel panelEntradaDatos = new JPanel(new GridLayout(6, 2, 5, 5));
 
         // Inicializar precios de productos
         preciosProductos = new HashMap<>();
@@ -48,12 +43,24 @@ public class MonitorPedido extends JFrame {
         preciosProductos.put("Producto 5", 33050.0);
         preciosProductos.put("Producto 6", 29000.5);
         preciosProductos.put("Producto 7", 50350.0);
+
         // Inicializar tarjetas
         mapaTarjetas = new HashMap<>();
         mapaTarjetas.put("MasterCard", new Mastercard(2));
         mapaTarjetas.put("Visa", new Visa(3));
         mapaTarjetas.put("ComarcaPlus", new Comarcaplus(2));
         mapaTarjetas.put("Otro", new TarjetaCredito(0));
+
+        // Panel principal con BorderLayout
+        JPanel panelPrincipal = new JPanel(new BorderLayout(10, 10));
+
+        // Panel para la creación de pedidos
+        JPanel panelPedidos = new JPanel(new BorderLayout());
+        panelPedidos.setPreferredSize(new Dimension(500, 400));
+        panelPedidos.setBorder(BorderFactory.createTitledBorder("Formulario de Pedido"));
+
+        // Panel de entrada de datos para el pedido
+        JPanel panelEntradaDatos = new JPanel(new GridLayout(5, 2, 5, 5));
 
         // ComboBox para el tipo (Bebida o Plato)
         JLabel etiquetaTipo = new JLabel("Tipo:");
@@ -81,46 +88,43 @@ public class MonitorPedido extends JFrame {
         panelEntradaDatos.add(etiquetaPrecio);
         panelEntradaDatos.add(campoPrecio);
 
-        panelPrincipal.add(panelEntradaDatos, BorderLayout.NORTH);
-
-        // Panel para la lista de pedidos y botones
-        JPanel panelPedidos = new JPanel(new BorderLayout());
+        panelPedidos.add(panelEntradaDatos, BorderLayout.NORTH);
 
         // Modelo y JList para mostrar los pedidos
         modeloListaPedidos = new DefaultListModel<>();
         listaPedidos = new JList<>(modeloListaPedidos);
         panelPedidos.add(new JScrollPane(listaPedidos), BorderLayout.CENTER);
 
-        // Panel de botones
-        JPanel panelBotones = new JPanel();
-
         // Botón para agregar producto
         JButton botonAgregar = new JButton("Agregar Producto");
         botonAgregar.addActionListener(e -> this.agregarProductoAPedido());
-        panelBotones.add(botonAgregar);
+        panelPedidos.add(botonAgregar, BorderLayout.SOUTH);
+
+        // Panel para el formulario de pago
+        JPanel panelPago = new JPanel(new GridLayout(8, 2, 5, 5));
+        panelPago.setPreferredSize(new Dimension(200, 400));
+        panelPago.setBorder(BorderFactory.createTitledBorder("Formulario de Pago"));
+
+        // TextField para la propina
+        JLabel etiquetaPropina = new JLabel("Propina (% del total):");
+        comboBoxPropina = new JComboBox<>(new Double[]{2.0, 3.0, 5.0});
+        panelPago.add(etiquetaPropina);
+        panelPago.add(comboBoxPropina);
 
         // ComboBox para seleccionar la tarjeta
         JLabel etiquetaTarjeta = new JLabel("Tarjeta:");
         comboBoxTarjeta = new JComboBox<>(mapaTarjetas.keySet().toArray(new String[0]));
-        panelEntradaDatos.add(etiquetaTarjeta);
-        panelEntradaDatos.add(comboBoxTarjeta);
-
-        panelPrincipal.add(panelEntradaDatos, BorderLayout.NORTH);
-
-        // TextField para la propina
-        JLabel etiquetaPropina = new JLabel("Propina (% del total):");
-        comboBoxPropina = new JComboBox<>(new Double[]{2.0,3.0,5.0});
-        panelEntradaDatos.add(etiquetaPropina);
-        panelEntradaDatos.add(comboBoxPropina);
-
-        panelPrincipal.add(panelEntradaDatos, BorderLayout.NORTH);
+        panelPago.add(etiquetaTarjeta);
+        panelPago.add(comboBoxTarjeta);
 
         // Botón para pagar
         JButton botonPagar = new JButton("Pagar");
         botonPagar.addActionListener(e -> this.pagarPedido());
-        panelBotones.add(botonPagar);
-        panelPedidos.add(panelBotones, BorderLayout.SOUTH);
+        panelPago.add(new JLabel()); // Empty label for alignment
+        panelPago.add(botonPagar);
+
         panelPrincipal.add(panelPedidos, BorderLayout.CENTER);
+        panelPrincipal.add(panelPago, BorderLayout.EAST);
 
         add(panelPrincipal);
 
@@ -137,7 +141,7 @@ public class MonitorPedido extends JFrame {
         String nombreProducto = (String) comboBoxProducto.getSelectedItem();
         int cantidad = (int) spinnerCantidad.getValue();
         double precio = Double.parseDouble(campoPrecio.getText());
-        String pedidoFila = "Producto: " + nombreProducto + ", Cantidad: " + cantidad + ", Precio: " + precio;
+        String pedidoFila = "Producto: " + nombreProducto + ", Cantidad: " + cantidad + ", Precio (por unidad): " + precio;
         modeloListaPedidos.addElement(pedidoFila);
         if(Objects.equals(comboBoxTipo.getSelectedItem(), "Bebida")){
             pedido.agregarProducto(new Bebida(nombreProducto, cantidad, precio));
